@@ -1,5 +1,7 @@
 # perfSONAR Logo
 
+![perfSONAR Logo](perfsonar-powered-path.svg)
+
 This is a version of the perfSONAR logo rendered as Scalable Vector
 Graphics (SVG) instead of the bitmaps that have been floating around
 for many years.
