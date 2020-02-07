@@ -2,8 +2,8 @@
 
 ## Building the Logos
 
-All of the logos are produced from `perfsonar.svg` and
-`perfsonar-powered.svg`.
+All of the logos are produced from `perfsonar-path.svg` and
+`perfsonar-powered-path.svg`.
 
 Run `make` to produce the following variants of both:
 
@@ -20,7 +20,16 @@ for the crosshairs and with and without the "powered" add-on, run
 
 
 This version of the logo was created in Inkscape, and edits should be
-done there as welll.  The files contain Inkscape-specific XML but
+done there as well.  The files contain Inkscape-specific XML but
 should still work fine with anything that wants to render it.
 
+
+**IMPORTANT:** When editing, edit `perfsonar.svg` and
+`perfsonar-powered.svg`.  Those files still have the original text.
+Then convert the text parts of each to a path and re-save as
+`perfsonar-path.svg` and `perfsonar-powered-path.svg`.  The Makefile
+will fail if it detects that the non-path version(s) haven't been
+created.
+
 The font used is DejaVu Sans:  https://dejavu-fonts.github.io
+

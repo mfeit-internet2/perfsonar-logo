@@ -8,11 +8,15 @@ default: build
 # Plain Logo
 #
 
-perfsonar-transparent.svg: perfsonar.svg
+perfsonar-path.svg: perfsonar.svg
+	@echo "$@ must be manually built from $<; see README.md."
+	@false
+
+perfsonar-transparent.svg: perfsonar-path.svg
 	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
 TO_CLEAN += perfsonar-transparent.svg
 
-perfsonar-white.svg: perfsonar.svg
+perfsonar-white.svg: perfsonar-path.svg
 	sed -e 's/#000000/#ffffff/g' "$<" > "$@"
 TO_CLEAN += perfsonar-white.svg
 
@@ -25,11 +29,15 @@ TO_CLEAN += perfsonar-white-transparent.svg
 # Powered Logo
 #
 
-perfsonar-powered-transparent.svg: perfsonar-powered.svg
+perfsonar-powered-path.svg: perfsonar-powered.svg
+	@echo "$@ must be manually built from $<; see README.md."
+	@false
+
+perfsonar-powered-transparent.svg: perfsonar-powered-path.svg
 	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
 TO_CLEAN += perfsonar-powered-transparent.svg
 
-perfsonar-powered-white.svg: perfsonar-powered.svg
+perfsonar-powered-white.svg: perfsonar-powered-path.svg
 	sed -e 's/#000000/#ffffff/g' "$<" > "$@"
 TO_CLEAN += perfsonar-powered-white.svg
 
