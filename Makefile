@@ -27,7 +27,7 @@ TO_CLEAN += perfsonar-white-transparent.svg
 
 perfsonar-powered-transparent.svg: perfsonar-powered.svg
 	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
-TO_CLEAN += perfsonar-transparent.svg
+TO_CLEAN += perfsonar-powered-transparent.svg
 
 perfsonar-powered-white.svg: perfsonar-powered.svg
 	sed -e 's/#000000/#ffffff/g' "$<" > "$@"
