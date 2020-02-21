@@ -1,0 +1,136 @@
+#!/bin/sh -e
+#
+# Build the variants of the perfSONAR logo
+#
+
+OUTDIR="$1"
+
+#
+# SVG Variants
+#
+
+for VARIANT in logo powered icon
+do
+    BASE_FILENAME="${OUTDIR}/perfsonar-${VARIANT}"
+    case "${VARIANT}" in
+	icon)
+	    BASE_FILE="parts-icon.svg"
+	    BASE_PARAMS="--param icon 1"
+	    ;;
+
+	logo)
+	    BASE_FILE="parts-text.svg"
+	    BASE_PARAMS="--param icon 1 --param text 1"
+	    ;;
+
+	powered)
+	    BASE_FILE="parts.svg"
+	    BASE_PARAMS="--param icon 1 --param text 1 --param powered 1"
+	    ;;
+
+	*)
+	    echo "INTENRAL ERROR: Unsupported variant"
+	    exit 1
+	    ;;
+    esac
+
+
+    for COLOR in black white
+    do
+	for FILL in empty full transparent
+	do
+
+	    case "${FILL}" in
+		empty)
+		    PARAMS="${BASE_PARAMS} --param icon_fill 0"
+		    ;;
+		full|transparent)
+		    PARAMS="${BASE_PARAMS} --param icon_fill 1"
+		    ;;
+		*)
+		    echo "INTENRAL ERROR: Unsupported fill"
+		    exit 1
+		    ;;
+	    esac
+
+	    FILENAME="${BASE_FILENAME}-${COLOR}-${FILL}.svg"
+	    xsltproc -o "${FILENAME}" ${PARAMS} parts.xslt "${BASE_FILE}"
+
+	    # Apply color and transparency changes
+
+	    case "${COLOR}" in
+		black)
+		    true  # Default is black
+		    ;;
+		white)
+		    #sed -i -e 's/\([";]\)stroke:#000000/\1stroke:#ffffff/g' "${FILENAME}"
+		    sed -i \
+			-e 's/fill:#000000;fill-opacity:1/fill:#ffffff;fill-opacity:1/g' \
+			-e 's/stroke:#000000;stroke-width:/stroke:#ffffff;stroke-width:/g' \
+			"${FILENAME}"
+		    ;;
+		*)
+		    echo "INTENRAL ERROR: Unsupported color"
+		    exit 1
+		    ;;
+	    esac
+
+	    case "${FILL}" in
+		empty|full)
+		    true
+		    ;;
+		transparent)
+		    sed -i -e 's/\([";]\)fill:#31b63f;fill-opacity:1/\1fill:#31b63f;fill-opacity:0.75/g' "${FILENAME}"
+		    ;;
+		*)
+		    echo "INTENRAL ERROR: Unsupported fill"
+		    exit 1
+		    ;;
+	    esac
+
+	done
+    done
+
+done
+
+
+#
+# PNGs
+#
+
+for FILE in $(find "${OUTDIR}" -name "*.svg")
+do
+    OUTBASE=$(echo "${FILE}" | sed -e 's/\.[^.]*$//')
+
+    #for SIZE in 10 25 50 100 200 400
+    for SIZE in 200
+    do
+	OUTFILE="${OUTBASE}-${SIZE}.png"
+	inkscape \
+	    --export-png="${OUTFILE}" \
+	    --export-height="${SIZE}" \
+	    "${FILE}"
+    done
+done
+
+
+#
+# Favicon
+#
+
+FAVICON_PNG="${OUTDIR}/favicon.png"
+inkscape \
+    --export-png="${FAVICON_PNG}" \
+    --export-height="16" \
+    --export-width="16" \
+    --export-background=#ffffff \
+    "${OUTDIR}/perfsonar-icon-black-full.svg"
+
+convert \
+    -density 256x256 \
+    "${FAVICON_PNG}" \
+    -define icon:auto-resize="16,16" \
+    -colors 256 \
+    "${OUTDIR}/favicon.ico"
+
+rm -f "${FAVICON_PNG}"

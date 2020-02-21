@@ -6,8 +6,8 @@ This is a version of the perfSONAR logo rendered as Scalable Vector
 Graphics (SVG) instead of the bitmaps that have been floating around
 for many years.
 
-The "O" symbol has been carefully reconstructed from one of the bitmaps
-and should be fairly faithful to Jason Zurawski's original.
+The crosshair symbol has been carefully reconstructed from one of the
+bitmaps and should be fairly faithful to Jason Zurawski's original.
 
 The font has been changed to the open-source
 [DejaVu Sans](https://dejavu-fonts.github.io).  The original appears
@@ -15,29 +15,57 @@ to have been done with Adobe [Myriad Pro](https://fonts.adobe.com/fonts/myriad),
 which is proprietary.
 
 
-## Building the Logos
 
-All of the logos are produced from `perfsonar-path.svg` and
-`perfsonar-powered-path.svg`.
+## Prerequisites
 
-Run `make` to produce the following variants of both:
+Building the logo requires a system with the following available at
+the command line:
 
- * White text and crosshair lines
- * Black text and crosshair lines, crosshairs with transparent center
- * White text and crosshair lines, crosshairs with transparent center
+ * ImageMagick
+ * Inkscape
+ * Make
+ * Tar
+ * Xsltproc
+ * Zip
 
-
-## Editing Notes
-
-
-This version of the logo was created in Inkscape, and edits should be
-done there as well.  The files contain Inkscape-specific XML but
-should still work fine with anything that wants to render it.
+On Red Hat, `yum -y install ImageMagick inkscape make tar libxslt zip` will
+install everything needed.
 
 
-**IMPORTANT:** When editing, edit `perfsonar.svg` and
-`perfsonar-powered.svg`.  Those files still have the original text.
-Then convert the text parts of each to a path and re-save as
-`perfsonar-path.svg` and `perfsonar-powered-path.svg`.  The Makefile
-will fail if it detects that the non-path version(s) haven't been
-created.
+## Building the Logo
+
+Run `make` 
+
+
+## Modifying the Logo
+
+The original, complete version of the logo is `original.svg`.
+
+It was created in Inkscape, and edits should be done there as well.
+The files contain Inkscape-specific XML but should still work fine
+with anything that wants to render it.
+
+Because there's no easy, practical way to automatically derive
+versions of the logo with proper bounding boxes and margins and text
+converted to paths, the repository includes files where this has been
+done.
+
+**If the logo is changed, follow this procedure to update the files:**
+
+ * Start Inkscape
+ * Open `original.svg`
+ * Select all text objects
+ * Convert them to paths (`Shift` + `Ctrl` + `C`)
+    * **DO NOT SAVE `original.svg` after this point.
+ * Make all layers visible
+ * Open _Document Properties_ (`Shift` + `Ctrl` + `D`)
+ * Expand _Resize page to content...`
+ * Make sure all four margins are set to `15.0`.
+ * Click _Resize page to drawing or selection_.
+ * Save as `parts.svg`.
+ * Make the `powered` layer invisible.
+ * Click _Resize page to drawing or selection_ in _Document Properties_.
+ * Save as `parts-text.svg`.
+ * Make the `text` layer invisible.
+ * Click _Resize page to drawing or selection_ in _Document Properties_.
+ * Save as `parts-icon.svg`.

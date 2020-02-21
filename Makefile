@@ -4,57 +4,29 @@
 
 default: build
 
-#
-# Plain Logo
-#
-
-perfsonar-path.svg: perfsonar.svg
-	@echo "$@ must be manually built from $<; see README.md."
-	@false
-
-perfsonar-transparent.svg: perfsonar-path.svg
-	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
-TO_CLEAN += perfsonar-transparent.svg
-
-perfsonar-white.svg: perfsonar-path.svg
-	sed -e 's/#000000/#ffffff/g' "$<" > "$@"
-TO_CLEAN += perfsonar-white.svg
-
-perfsonar-white-transparent.svg: perfsonar-white.svg
-	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
-TO_CLEAN += perfsonar-white-transparent.svg
+NAME=perfsonar-logo
 
 
-#
-# Powered Logo
-#
+BUILD_DIR=$(NAME)
+$(BUILD_DIR): $(MAKEFILE) build-logo parts.xslt \
+	parts.svg parts-text.svg parts-icon.svg
+	rm -rf "$@"
+	mkdir -p $(BUILD_DIR)
+	./build-logo "$(BUILD_DIR)"
+TO_CLEAN += $(BUILD_DIR)
 
-perfsonar-powered-path.svg: perfsonar-powered.svg
-	@echo "$@ must be manually built from $<; see README.md."
-	@false
 
-perfsonar-powered-transparent.svg: perfsonar-powered-path.svg
-	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
-TO_CLEAN += perfsonar-powered-transparent.svg
+$(NAME).tar.gz: $(BUILD_DIR)
+	tar czf "$@" "$<"
+TO_CLEAN += $(NAME).tar.gz
 
-perfsonar-powered-white.svg: perfsonar-powered-path.svg
-	sed -e 's/#000000/#ffffff/g' "$<" > "$@"
-TO_CLEAN += perfsonar-powered-white.svg
+$(NAME).zip: $(BUILD_DIR)
+	zip -q -r "$@" "$<"
+TO_CLEAN += $(NAME).zip
 
-perfsonar-powered-white-transparent.svg: perfsonar-powered-white.svg
-	sed -e '/fill:#31b63f/s/fill-opacity:[0-9.]+;/fill-opacity:0.75/g' "$<" > "$@"
-TO_CLEAN += perfsonar-powered-white-transparent.svg
 
-build: \
-	perfsonar.svg \
-	perfsonar-transparent.svg \
-	perfsonar-white.svg \
-	perfsonar-white-transparent.svg \
-	\
-	perfsonar-powered.svg \
-	perfsonar-powered-transparent.svg \
-	perfsonar-powered-white.svg \
-	perfsonar-powered-white-transparent.svg
+build: $(NAME).tar.gz $(NAME).zip
+
 
 clean:
 	rm -rf $(TO_CLEAN) *~
