@@ -4,12 +4,10 @@
 
 This is a version of the perfSONAR logo rendered as Scalable Vector
 Graphics (SVG) instead of the bitmaps that have been floating around
-for many years.
-
-The crosshair symbol has been carefully reconstructed from one of the
-bitmaps and should be fairly faithful to Jason Zurawski's original.
-
-### Font
+for many years.  In February, 2020, the team elected to switch to a
+newer version with a differnt font that is bolder, better matches the
+style of the crosshairs and will work better in some media such as
+embroidery.
 
 The font has been changed the open-source [Rabbid Highway Sign II](https://fontlibrary.org/en/font/rabbid-highway-sign-ii),
 which better matches the style of the "O".  The original appears to have
