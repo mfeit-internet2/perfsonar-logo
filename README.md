@@ -11,15 +11,16 @@ bitmaps and should be fairly faithful to Jason Zurawski's original.
 
 ### Font
 
-The font has been changed to the open-source
-[DejaVu Sans](https://dejavu-fonts.github.io).  The original appears
-to have been done with Adobe [Myriad Pro](https://fonts.adobe.com/fonts/myriad),
-which is proprietary.
+The font has been changed the open-source [Rabbid Highway Sign II](https://fontlibrary.org/en/font/rabbid-highway-sign-ii),
+which better matches the style of the "O".  The original appears to have
+been done with Adobe [Myriad Pro](https://fonts.adobe.com/fonts/myriad),
+which is proprietary.  A copy of the new font is included in this respository.
 
 To install this font:
 
- * [On a Mac](https://support.apple.com/en-us/HT201749)
-
+ * [On Linux](https://www.linux.com/tutorials/how-manage-fonts-linux/)
+ * [On Mac OS X](https://support.apple.com/en-us/HT201749)
+ * [On Windows](https://support.microsoft.com/en-us/help/314960/how-to-install-or-remove-a-font-in-windows)
 
 
 ## Prerequisites
@@ -75,3 +76,4 @@ done.
  * Make the `text` layer invisible.
  * Click _Resize page to drawing or selection_ in _Document Properties_.
  * Save as `parts-icon.svg`.
+ * Quit Inkscape
