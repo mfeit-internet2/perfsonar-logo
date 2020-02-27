@@ -61,7 +61,7 @@ done.
  * Open `original.svg`
  * Select all text objects
  * Convert them to paths (`Shift` + `Ctrl` + `C`)
-    * **DO NOT SAVE `original.svg` after this point.
+    * **DO NOT SAVE `original.svg` AFTER THIS POINT.**
  * Make all layers visible
  * Open _Document Properties_ (`Shift` + `Ctrl` + `D`)
  * Expand _Resize page to content...`
