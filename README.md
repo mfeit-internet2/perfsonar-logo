@@ -9,10 +9,16 @@ for many years.
 The crosshair symbol has been carefully reconstructed from one of the
 bitmaps and should be fairly faithful to Jason Zurawski's original.
 
+### Font
+
 The font has been changed to the open-source
 [DejaVu Sans](https://dejavu-fonts.github.io).  The original appears
 to have been done with Adobe [Myriad Pro](https://fonts.adobe.com/fonts/myriad),
 which is proprietary.
+
+To install this font:
+
+ * [On a Mac](https://support.apple.com/en-us/HT201749)
 
 
 
